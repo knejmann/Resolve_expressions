@@ -44,8 +44,23 @@ Resolve then allows to do more 'programming' like defining our own variables and
 
 The final result is returned by a statement like `return(value)`
 
+# Counter with prefix and postfix
+
+```
+: -- setup:
+from = 0; -- starting value
+to = 123456; -- ending value
+prefix = "pre " -- text before the number
+postfix = " post" -- text after the number
+-- setup end
+count = from + (to-from)*(time/comp.RenderEnd)
+formatted = string.format("%i", count)
+return(prefix .. formatted .. postfix)
+```
+
 
 # Counter with thousands delimiter, prefix, postfix
+
 ```
 : -- setup:
 from = 0; -- starting value
@@ -67,6 +82,22 @@ count = count + 1
 end
 return(prefix .. string.reverse(delimited) .. postfix)
 ```
+
+# Counter with thousands delimiter, prefix, postfix - improved
+
+```
+: -- setup
+from = 0; -- starting value
+to = 123456; -- ending value
+delim = "," -- the text inserted as a thousands separator.
+prefix = "pre " -- text before the number
+postfix = " post" -- text after the number
+-- setup end
+number = from + (to-from)*(time/comp.RenderEnd)
+delimited = (string.format('%d', number)):reverse():gsub("(%d%d%d)","%1" .. delim):gsub(",(%-?)$","%1"):reverse()
+return(prefix .. delimited .. postfix)
+```
+
 
 # Time counter
 
