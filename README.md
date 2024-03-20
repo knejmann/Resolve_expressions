@@ -37,10 +37,11 @@ If we want this to be in percents we just multiply by 100: `time / comp.RenderEn
 You can find more information on the format flags (like %.2f) used by string.format [here](https://faq.cprogramming.com/cgi-bin/smartfaq.cgi?answer=1048379655&id=1043284385). It uses the syntax from the programming language C.
 
 # Multi line expressions
-Expressions must be on one line and return one value by default - like the examples above.
+Expressions by default must be one line and return one value - like the examples above.
 But to do more complicated expressions - or to improve readability - we can use multiple lines by making the first character of an expression `:`.
 
-Resolve then allows to do more 'programming' like defining our own variables and using if-then-else statements.
+Resolve then allows us to do more 'programming' like defining our own variables and using if-then-else statements.
+We can even add comments. Anything after two dashes `--` is considered a comment and is not evaluated as code.
 
 The final result is returned by a statement like `return(value)`
 
