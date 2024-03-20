@@ -45,6 +45,12 @@ We can even add comments. Anything after two dashes `--` is considered a comment
 
 The final result is returned by a statement like `return(value)`
 
+# Developing and testing expressions
+It can be usefull to write and edit the expressions in a text editor - maybe even something like Visual Studio Code, that has syntax highlighting.
+
+You can also find online LUA interpreters. I've used https://onecompiler.com/lua/.
+Skip the first `:` , set the relevant variable to a fixed value `number = 123456` and replace `return(xxx)` with `print(xxx)`
+
 # Counter with prefix and postfix
 
 ```
@@ -98,6 +104,7 @@ number = from + (to-from)*(time/comp.RenderEnd)
 delimited = (string.format('%d', number)):reverse():gsub("(%d%d%d)","%1" .. delim):gsub(",(%-?)$","%1"):reverse()
 return(prefix .. delimited .. postfix)
 ```
+Note: There is a "bug" in the above code. The last `gsub(",(%-?)$","%1"):reverse()` should remove excess delimiters but keep the minus-sign if present. The `,` must be replaced with the delimiter used.
 
 # Counter with Indian style delimiter, prefix, postfix
 To format in the style traditional in India - 12,34,56,789
@@ -154,3 +161,4 @@ postfix = "" -- text after the date
 datevalue = math.floor(from + ((to-from)*time/comp.RenderEnd))
 return(prefix .. os.date(format, datevalue) .. postfix)
 ```
+
