@@ -99,6 +99,47 @@ delimited = (string.format('%d', number)):reverse():gsub("(%d%d%d)","%1" .. deli
 return(prefix .. delimited .. postfix)
 ```
 
+# Counter with Indian style delimiter, prefix, postfix
+To format in the style traditional in India - 12,34,56,789
+```
+: -- setup
+from = -12345678; -- starting value
+to = 12345678; -- ending value
+delim = "," -- the text inserted as a thousands separator.
+prefix = "pre " -- text before the number
+postfix = " post" -- text after the number
+-- setup end
+number = from + (to-from)*(time/comp.RenderEnd)
+
+function formatInd(num)
+    local formatted = string.format('%d', num)
+    local twos = ""
+    if formatted:sub(1,1) == "-" then
+      sign = "-"
+      formatted = formatted:sub(2,-1)
+      else
+        sign = ''
+    end
+
+    if #formatted <= 3 then
+      return sign .. formatted
+    else
+      local three = formatted:sub(-3, -1)
+      local rest = formatted:sub(0, -4)
+      while #rest > 0 do
+        twos = rest:sub(-2, -1) .. delim .. twos
+        rest = rest:sub(0,-3)
+        -- print("formatted", formatted, "twos", twos, "three", three, "rest", rest)
+      end
+
+      return sign .. twos .. three
+    end
+end
+
+return(prefix .. formatInd(number) .. postfix)
+
+```
+
 
 # Time counter
 
